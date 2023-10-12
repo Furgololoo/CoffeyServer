@@ -1,7 +1,0 @@
-# ninja log v5
-16	88	7188253713816485	CMakeFiles/CoffeyServer.dir/src/server/servermanager.cpp.obj	ffd80f00786880df
-12	3682	7188253749688147	CMakeFiles/CoffeyServer.dir/src/server/serverworker.cpp.obj	7e1bfc34027c3bd2
-6	682	7187383918146297	CMakeFiles/CoffeyServer.dir/src/main.cpp.obj	e7e5194cb59b7740
-682	815	7187383919103934	CoffeyServer.exe	8ac65f0969f7f39
-14	81	7188253846506083	CMakeFiles/CoffeyServer.dir/src/server/servermanager.cpp.obj	a511eaeb5e92b55f
-6	3603	7188253881654114	CMakeFiles/CoffeyServer.dir/src/server/serverworker.cpp.obj	2abf8169de765509

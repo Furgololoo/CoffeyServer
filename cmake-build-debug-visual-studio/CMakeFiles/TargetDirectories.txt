@@ -1,3 +1,0 @@
-D:/C++/CoffeyServer/cmake-build-debug-visual-studio/CMakeFiles/CoffeyServer.dir
-D:/C++/CoffeyServer/cmake-build-debug-visual-studio/CMakeFiles/edit_cache.dir
-D:/C++/CoffeyServer/cmake-build-debug-visual-studio/CMakeFiles/rebuild_cache.dir
