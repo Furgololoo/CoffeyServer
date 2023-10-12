@@ -1,0 +1,3 @@
+D:/C++/CoffeyServer/cmake-build-debug-mingw/CMakeFiles/CoffeyServer.dir
+D:/C++/CoffeyServer/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+D:/C++/CoffeyServer/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir

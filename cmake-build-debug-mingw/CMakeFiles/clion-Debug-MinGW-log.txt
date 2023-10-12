@@ -1,0 +1,8 @@
+"C:\Users\bfurg\AppData\Local\Programs\CLion 2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Users/bfurg/AppData/Local/Programs/CLion 2/bin/ninja/win/x64/ninja.exe" -G Ninja -S D:\C++\CoffeyServer -B D:\C++\CoffeyServer\cmake-build-debug-mingw
+-- Boost library status: 
+--     version: 1.83.0
+--     libraries: 
+--     include dirs: D:/Libraries/boost_1_83_0
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: D:/C++/CoffeyServer/cmake-build-debug-mingw

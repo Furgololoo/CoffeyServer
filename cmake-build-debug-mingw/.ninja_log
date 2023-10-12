@@ -1,0 +1,5 @@
+# ninja log v5
+14	54	7188427799123761	CMakeFiles/CoffeyServer.dir/src/server/servermanager.cpp.obj	f45f2c22dbc64552
+9	53	7188427799093629	CMakeFiles/CoffeyServer.dir/src/server/serverworker.cpp.obj	7b0367b40b300ebf
+11	18680	7188260868125461	CMakeFiles/CoffeyServer.dir/src/main.cpp.obj	af50ba5af2b0dbe2
+1	203	7188433424661147	build.ninja	a628ad1b07d6972b
