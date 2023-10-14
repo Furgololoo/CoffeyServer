@@ -4,10 +4,16 @@
 
 #pragma once
 
-namespace server {
+#include "listener.h"
+#include <boost/asio/strand.hpp>
 
-    class ServerManager {
-    };
+namespace network {
 
-}// namespace server
+class ServerManager {
 
+public:
+  explicit ServerManager(const boost::asio::ip::address &address,
+                         const unsigned short port, const short threads);
+};
+
+} // namespace network

@@ -4,5 +4,4 @@
 
 #include "serverworker.h"
 
-namespace server {
-}// namespace server
+namespace network {} // namespace network

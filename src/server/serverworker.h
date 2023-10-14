@@ -3,13 +3,11 @@
 ////
 //
 #pragma once
-//
-//#include <boost/beast.hpp>
-//
-//namespace server {
-//
-//    class ServerWorker {
-//    };
-//
-//}// namespace server
-//
+
+#include <boost/beast.hpp>
+
+namespace network {
+
+class ServerWorker {};
+
+} // namespace network
