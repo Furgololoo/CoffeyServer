@@ -1,3 +1,4 @@
+#include <boost/json/src.hpp>
 #include <boost/version.hpp>
 #include <iostream>
 
@@ -16,10 +17,18 @@ int main() {
   //                                        9999, 1);
 
   namespace json = boost::json;
-
   json::object obj;
-  obj["type"] = 0;
-  obj["action"] = 0;
-  obj["content_id"] = 35;
+  json::object requestJson;
+  requestJson["type"] = 0;
+  requestJson["action"] = 0;
+  requestJson["content_id"] = 35;
+  obj["request"] = requestJson;
+
+  json::object userJson;
+  userJson["user_id"] = 11;
+  obj["user"] = userJson;
+
+  network::request::Request request;
+  request.processRequest(obj);
   return 0;
 }

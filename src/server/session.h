@@ -17,6 +17,8 @@
 #include <thread>
 #include <vector>
 
+#include "request/request.h"
+
 namespace network {
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
@@ -35,7 +37,10 @@ class Session : public std::enable_shared_from_this<Session> {
 
 public:
   // Take ownership of the socket
-  explicit Session(tcp::socket &&socket) : ws_(std::move(socket)) {}
+  explicit Session(tcp::socket &&socket) : ws_(std::move(socket)) {
+    std::cout << "Session Constructor, address " << this << " socket address "
+              << &socket << std::endl;
+  }
 
   // Get on the correct executor
   void run();

@@ -5,7 +5,4 @@
 #pragma once
 #include <cstdint>
 
-enum class ERequestTypes : uint8_t {
-  GET = 0
-  
-};
+enum class EContentID : uint8_t { TICKET = 0x0, SPRINT = 0x1, USER = 0x2 };
