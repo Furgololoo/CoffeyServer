@@ -11,6 +11,9 @@ if (WIN32)
     endif ()
 endif ()
 
+set(PostgreSQL_LIBRARY "H:/PostgreSQL/lib/libpq.lib")
+set(PostgreSQL_INCLUDE_DIR "H:/PostgreSQL/include")
+
 find_package(Boost 1.82.0 REQUIRED)
 
 if (Boost_FOUND)
@@ -20,11 +23,6 @@ if (Boost_FOUND)
     message(STATUS "    include dirs: ${Boost_INCLUDE_DIRS}")
     include_directories(${Boost_INCLUDE_DIRS})
 endif ()
-
-set(MYSQL_CONNECTOR_CPP "D:/Libraries/MySQLConnector")
-include_directories(${MYSQL_CONNECTOR_CPP}/include)
-include_directories(${MYSQL_CONNECTOR_CPP}/include/cppconn)
-link_directories(${MYSQL_CONNECTOR_CPP}/lib)
 
 add_executable(CoffeyServer
         src/main.cpp
@@ -39,9 +37,12 @@ add_executable(CoffeyServer
         src/server/request/requestactions.h
         src/server/request/content_id.h
         src/database/database.cpp
-        src/database/database.h)
+        src/database/database.h
+        src/config.h)
 
+# PostgreSQL
+add_subdirectory(deps/libpqxx-7.8.1 build-pqxx)
+target_link_libraries(CoffeyServer pqxx)
 
 target_link_libraries(CoffeyServer ${Boost_LIBRARIES})
 target_link_libraries(CoffeyServer ${examples_LINK_LIBRARIES})
-target_link_libraries(CoffeyServer curl mysqlcppconn)

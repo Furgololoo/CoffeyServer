@@ -2,6 +2,7 @@
 #include <boost/version.hpp>
 #include <iostream>
 
+#include "database/database.h"
 #include "server/request/request.h"
 #include "server/servermanager.h"
 
@@ -16,19 +17,40 @@ int main() {
   //  network::ServerManager server_manager(net::ip::make_address("127.0.0.1"),
   //                                        9999, 1);
 
+  //  database::Database db;
+
+  //  db.displayUsers();
+  //  db.displayTables();
+
   namespace json = boost::json;
-  json::object obj;
-  json::object requestJson;
-  requestJson["type"] = 0;
-  requestJson["action"] = 0;
-  requestJson["content_id"] = 35;
-  obj["request"] = requestJson;
 
-  json::object userJson;
-  userJson["user_id"] = 11;
-  obj["user"] = userJson;
+  json::object body;
+  json::object usersInfo;
+  usersInfo["assignee_id"] = 1;
+  usersInfo["reporter_id"] = 1;
+  usersInfo["implementer_id"] = 1;
+  body["users_info"] = usersInfo;
 
-  network::request::Request request;
-  request.processRequest(obj);
+  json::object ticketData;
+  ticketData["title"] = "Fix spawner bug";
+  ticketData["description"] =
+      "For some values in initial_ai_number and max_ai_number, after entering "
+      "spawner game crash with error \"ERROR DIVIDE BY 0\"";
+  ticketData["acceptance_criteria"] =
+      "After entering spawner, game shouldn't crash";
+  ticketData["create_date"] = "2023:10:05";
+  ticketData["create_time"] = "12:47";
+  ticketData["update_date"] = "2023:10:06";
+  ticketData["update_time"] = "15:11";
+  ticketData["component"] = 8;
+  ticketData["priority"] = 3;
+  ticketData["status"] = 6;
+  body["ticket_data"] = ticketData;
+
+  json::object ticket;
+  ticket["ticket"] = body;
+
+  std::cout << ticket << std::endl;
+  
   return 0;
 }

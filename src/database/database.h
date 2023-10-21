@@ -4,9 +4,26 @@
 
 #pragma once
 
-#include <mysqlx/xdevapi.h>
+#include <boost/json.hpp>
+#include <memory>
+#include <pqxx/pqxx>
 
 namespace database {
-class Database {};
+namespace json = boost::json;
+
+class Database {
+public:
+  Database();
+
+  void connect();
+  void displayTables();
+  void displayUsers();
+
+  void createUser(const std::string &userName);
+  void createTicket(const json::object &data);
+
+private:
+  std::unique_ptr<pqxx::connection> conn;
+};
 
 } // namespace database
