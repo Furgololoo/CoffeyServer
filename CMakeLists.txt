@@ -38,7 +38,8 @@ add_executable(CoffeyServer
         src/server/request/content_id.h
         src/database/database.cpp
         src/database/database.h
-        src/config.h)
+
+        src/utils/config.h)
 
 # PostgreSQL
 add_subdirectory(deps/libpqxx-7.8.1 build-pqxx)
