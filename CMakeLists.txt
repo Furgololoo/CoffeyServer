@@ -28,18 +28,25 @@ add_executable(CoffeyServer
         src/main.cpp
 
         # Communication
-        src/server/servermanager.cpp src/server/servermanager.h
-        src/server/listener.cpp src/server/listener.h
-        src/server/session.cpp src/server/session.h
+        #        src/server/servermanager.cpp src/server/servermanager.h
+        #        src/server/listener.cpp src/server/listener.h
+        #        src/server/session.cpp src/server/session.h
 
         # Request
         src/server/request/request.cpp src/server/request/request.h
-        src/server/request/requestactions.h
-        src/server/request/content_id.h
-        src/database/database.cpp
-        src/database/database.h
+        #        src/server/request/requestactions.h
+        #        src/server/request/content_id.h
+        #        src/database/database.cpp
+        #        src/database/database.h
 
-        src/utils/config.h)
+        # Buffer
+        src/buffer/buffer.cpp src/buffer/buffer.h
+
+        # Helpers
+        #        src/helpers/json_helper.cpp src/helpers/json_helper.h
+
+        src/utils/config.h
+)
 
 # PostgreSQL
 add_subdirectory(deps/libpqxx-7.8.1 build-pqxx)

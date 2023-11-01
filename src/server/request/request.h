@@ -4,8 +4,11 @@
 
 #pragma once
 
+#include "content_id.h"
 #include "requestactions.h"
+
 #include <boost/json.hpp>
+#include <iostream>
 
 namespace network::request {
 
@@ -13,14 +16,22 @@ namespace json = boost::json;
 
 class Request {
 public:
-  Request() = default;
+  //  explicit Request(const json::object &data);
+  Request(int id_) : id(id_) { /*std::cout << "constructing request\n";*/
+  }
 
-  void processRequest(const json::object &data);
+  ~Request() { /*std::cout << "deleting request\n";*/
+  }
+  int id;
 
 private:
-  bool validateRequest(const json::object &data);
+  //  ERequestActions actions = {};
+  //  EContentID content_id = {};
 
-  // database pointer
+  // create request in session
+  // pass request to the buffer
+  // request process gets request from buffer
+  // request process proceed request and sends response to client
 };
 
 } // namespace network::request

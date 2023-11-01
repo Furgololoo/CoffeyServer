@@ -18,6 +18,7 @@ ServerManager::ServerManager(const boost::asio::ip::address &address,
   // Create and launch a listening port
   std::make_shared<Listener>(ioc, tcp::endpoint{address, port})->run();
 
+  std::cout << "Started listening..." << std::endl;
   // Run the I/O service on the requested number of threads
   std::vector<std::thread> v;
   v.reserve(threads - 1);

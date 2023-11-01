@@ -62,6 +62,9 @@ void Session::on_read(beast::error_code ec, std::size_t bytes_transferred) {
   // Echo the message
   std::cout << "Received: " << beast::buffers_to_string(buffer_.cdata())
             << std::endl;
+  boost::json::value obj(beast::buffers_to_string(buffer_.cdata()));
+  request::Request request(obj.get_object());
+
   ws_.text(ws_.got_text());
   ws_.async_write(buffer_.data(), beast::bind_front_handler(
                                       &Session::on_write, shared_from_this()));

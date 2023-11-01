@@ -3,7 +3,7 @@
 //
 
 #include "database.h"
-#include "../config.h"
+#include "../utils/config.h"
 
 #include <iostream>
 
