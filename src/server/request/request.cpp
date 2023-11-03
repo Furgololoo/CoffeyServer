@@ -6,8 +6,28 @@
 #include <iostream>
 
 namespace network::request {
-// Request::Request(const json::object &data) {}
+Request::Request(const json::object &data) {
+  content = data.at("content").get_object();
+  auto ticket_data = content.at("ticket_data").as_object();
 
+  auto request_data = data.at("request_data").as_object();
+  content_id =
+      static_cast<EContentID>(request_data.at("content_id").as_int64());
+  action = static_cast<ERequestActions>(request_data.at("action").as_int64());
+  token = request_data.at("token").as_string();
+  token = request_data.at("token").as_string();
+  user_id = request_data.at("user_id").as_int64();
+}
+
+void Request::setResponse(std::function<void(const std::string &)> response_) {
+  response = response_;
+
+  callResponse("asddasasddas");
+}
+
+void Request::callResponse(const std::string &text) const { response(text); }
+
+json::object Request::getContentJson() const { return content; }
 // void Request::processRequest(const json::object &data) {
 //   // check if request contains every important data
 //   if (!validateRequest(data)) {

@@ -17,6 +17,7 @@
 #include <thread>
 #include <vector>
 
+#include "../buffer/buffer.h"
 #include "request/request.h"
 
 namespace network {
@@ -54,11 +55,14 @@ public:
 
   void on_read(beast::error_code ec, std::size_t bytes_transferred);
 
+  void do_write(const std::string &text);
+
   void on_write(beast::error_code ec, std::size_t bytes_transferred);
 
 private:
   websocket::stream<beast::tcp_stream> ws_;
   beast::flat_buffer buffer_;
+  buffer::Buffer &requestBuffer = buffer::Buffer::getInstance();
 };
 
 } // namespace network

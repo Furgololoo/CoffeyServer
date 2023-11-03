@@ -59,16 +59,27 @@ void Session::on_read(beast::error_code ec, std::size_t bytes_transferred) {
     return fail(ec, "read");
   }
 
-  // Echo the message
-  std::cout << "Received: " << beast::buffers_to_string(buffer_.cdata())
-            << std::endl;
-  boost::json::value obj(beast::buffers_to_string(buffer_.cdata()));
-  request::Request request(obj.get_object());
+  // creating request
+  boost::json::value data =
+      boost::json::parse(beast::buffers_to_string(buffer_.data()));
+
+  auto request = std::make_unique<request::Request>(data.get_object());
+  auto response = [&](const std::string &text) { do_write(text); };
+  request->setResponse(response);
+
+  requestBuffer.add(std::move(request));
 
   ws_.text(ws_.got_text());
-  ws_.async_write(buffer_.data(), beast::bind_front_handler(
-                                      &Session::on_write, shared_from_this()));
+  buffer_.consume(buffer_.size());
 }
+
+void Session::do_write(const std::string &text) {
+  ws_.text(true);
+  ws_.async_write(
+      net::buffer(text),
+      beast::bind_front_handler(&Session::on_write, shared_from_this()));
+}
+
 void Session::on_write(beast::error_code ec, std::size_t bytes_transferred) {
   boost::ignore_unused(bytes_transferred);
 

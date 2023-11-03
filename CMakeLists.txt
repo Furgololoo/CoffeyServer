@@ -28,14 +28,14 @@ add_executable(CoffeyServer
         src/main.cpp
 
         # Communication
-        #        src/server/servermanager.cpp src/server/servermanager.h
-        #        src/server/listener.cpp src/server/listener.h
-        #        src/server/session.cpp src/server/session.h
+        src/server/servermanager.cpp src/server/servermanager.h
+        src/server/listener.cpp src/server/listener.h
+        src/server/session.cpp src/server/session.h
 
         # Request
         src/server/request/request.cpp src/server/request/request.h
-        #        src/server/request/requestactions.h
-        #        src/server/request/content_id.h
+        src/server/request/requestactions.h
+        src/server/request/content_id.h
         #        src/database/database.cpp
         #        src/database/database.h
 
@@ -43,9 +43,15 @@ add_executable(CoffeyServer
         src/buffer/buffer.cpp src/buffer/buffer.h
 
         # Helpers
-        #        src/helpers/json_helper.cpp src/helpers/json_helper.h
+        src/helpers/json_helper.h
 
         src/utils/config.h
+        src/user/token.cpp
+        src/user/token.h
+        src/user/token.h
+        src/server/request/requestprocessing.cpp
+        src/server/request/requestprocessing.h
+        src/server/request/requestprocessing.h
 )
 
 # PostgreSQL

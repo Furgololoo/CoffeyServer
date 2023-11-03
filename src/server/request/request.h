@@ -7,7 +7,9 @@
 #include "content_id.h"
 #include "requestactions.h"
 
+#include <boost/beast.hpp>
 #include <boost/json.hpp>
+#include <functional>
 #include <iostream>
 
 namespace network::request {
@@ -16,17 +18,23 @@ namespace json = boost::json;
 
 class Request {
 public:
-  //  explicit Request(const json::object &data);
-  Request(int id_) : id(id_) { /*std::cout << "constructing request\n";*/
-  }
+  explicit Request(const json::object &data);
 
-  ~Request() { /*std::cout << "deleting request\n";*/
-  }
-  int id;
+  void setResponse(std::function<void(const std::string &text)> response_);
+
+  void callResponse(const std::string &text) const;
+
+  json::object getContentJson() const;
 
 private:
-  //  ERequestActions actions = {};
-  //  EContentID content_id = {};
+  ERequestActions action = {};
+  EContentID content_id = {};
+
+  json::object content;
+  std::string token;
+  uint8_t user_id;
+
+  std::function<void(const std::string &text)> response;
 
   // create request in session
   // pass request to the buffer

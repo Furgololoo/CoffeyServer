@@ -15,6 +15,9 @@ Buffer::Buffer() : buffer(std::array<std::unique_ptr<Request>, kBufferSize>{}) {
 void Buffer::add(std::unique_ptr<Request> request) {
   *toWrite = std::move(request);
   toWrite++;
+
+  if (counter == 0)
+    onDataAvailable();
   if (counter < kBufferSize)
     counter++;
 
@@ -38,10 +41,16 @@ std::optional<std::unique_ptr<Request>> Buffer::getNext() {
 void Buffer::status() {
   std::cout << "Begin status" << std::endl;
   for (const auto &i : buffer) {
-    std::cout << "id: " << ((i) ? std::to_string(i->id) : "empty") << std::endl;
+    std::cout << "id: " << ((i) ? &i : nullptr) << std::endl;
   }
   std::cout << "End status" << std::endl;
 }
+
 bool Buffer::isEmpty() const { return counter == 0; }
+
 int Buffer::size() const { return counter; }
+
+void Buffer::setOnDataAvailable(std::function<void()> func) {
+  onDataAvailable = func;
+};
 } // namespace buffer

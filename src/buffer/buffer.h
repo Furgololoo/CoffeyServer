@@ -6,6 +6,7 @@
 #include "../server/request/request.h"
 #include "../utils/config.h"
 #include <array>
+#include <functional>
 #include <iterator>
 #include <memory>
 
@@ -22,6 +23,8 @@ public:
     return instance;
   }
 
+  void setOnDataAvailable(std::function<void()> func);
+
   void add(std::unique_ptr<Request> request);
   std::optional<std::unique_ptr<Request>> getNext();
 
@@ -36,6 +39,8 @@ private:
   std::array<std::unique_ptr<Request>, kBufferSize>::iterator toWrite;
 
   int counter = 0;
+
+  std::function<void()> onDataAvailable;
 };
 
 } // namespace buffer
