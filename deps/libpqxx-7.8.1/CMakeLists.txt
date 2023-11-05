@@ -8,7 +8,7 @@ project(
     VERSION ${VER_FILE_CONTENT}
     LANGUAGES CXX
 )
-set(PostgreSQL_LIBRARY "H:/PostgreSQL/lib/libpq.lib")
+set(PostgreSQL_LIBRARY "F:/PostgreSQL16/lib/libpq.lib")
 
 if(NOT "${CMAKE_CXX_STANDARD}")
     set(CMAKE_CXX_STANDARD 17)

@@ -11,8 +11,8 @@ if (WIN32)
     endif ()
 endif ()
 
-set(PostgreSQL_LIBRARY "H:/PostgreSQL/lib/libpq.lib")
-set(PostgreSQL_INCLUDE_DIR "H:/PostgreSQL/include")
+set(PostgreSQL_LIBRARY "F:/PostgreSQL16/lib/libpq.lib") # hardcoded, TODO fix that
+set(PostgreSQL_INCLUDE_DIR "F:/PostgreSQL16/include") # hardcoded, TODO fix that
 
 find_package(Boost 1.82.0 REQUIRED)
 
