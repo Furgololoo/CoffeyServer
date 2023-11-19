@@ -6,7 +6,7 @@
 
 namespace user {
 namespace token {
-std::string &Token::generate() {
+std::string Token::generate() {
   std::string str("Asddasdasads");
   return str;
 }

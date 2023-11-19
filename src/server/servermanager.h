@@ -8,6 +8,7 @@
 #include "request/requestprocessing.h"
 #include <boost/asio/strand.hpp>
 #include <memory>
+#include <mutex>
 #include <thread>
 
 namespace network {
@@ -25,6 +26,7 @@ public:
 private:
   std::unique_ptr<std::jthread> request_processing_thread;
   request::RequestProcessing requestProcessing;
+  std::shared_ptr<Listener> listener;
 
   boost::asio::ip::address address;
   uint16_t port;

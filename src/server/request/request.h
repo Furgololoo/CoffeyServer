@@ -26,6 +26,9 @@ public:
 
   json::object getContentJson() const;
 
+  ERequestActions getRequestActions() const;
+  EContentID getContentID() const;
+
 private:
   ERequestActions action = {};
   EContentID content_id = {};

@@ -28,6 +28,9 @@ void Request::setResponse(std::function<void(const std::string &)> response_) {
 void Request::callResponse(const std::string &text) const { response(text); }
 
 json::object Request::getContentJson() const { return content; }
+ERequestActions Request::getRequestActions() const { return action; }
+EContentID Request::getContentID() const { return content_id; }
+
 // void Request::processRequest(const json::object &data) {
 //   // check if request contains every important data
 //   if (!validateRequest(data)) {

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.25)
 project(CoffeyServer)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -11,8 +11,10 @@ if (WIN32)
     endif ()
 endif ()
 
-set(PostgreSQL_LIBRARY "F:/PostgreSQL16/lib/libpq.lib") # hardcoded, TODO fix that
-set(PostgreSQL_INCLUDE_DIR "F:/PostgreSQL16/include") # hardcoded, TODO fix that
+#set(PostgreSQL_LIBRARY "F:/PostgreSQL16/lib/libpq.lib")
+#set(PostgreSQL_ROOT "F:/PostgreSQL16") # hardcoded, TODO fix that
+#set(PostgreSQL_LIBRARY "F:/PostgreSQL16/lib/libpq.lib") # hardcoded, TODO fix that
+#set(PostgreSQL_INCLUDE_DIR "F:/PostgreSQL16/include") # hardcoded, TODO fix that
 
 find_package(Boost 1.82.0 REQUIRED)
 
@@ -28,35 +30,32 @@ add_executable(CoffeyServer
         src/main.cpp
 
         # Communication
-        src/server/servermanager.cpp src/server/servermanager.h
-        src/server/listener.cpp src/server/listener.h
-        src/server/session.cpp src/server/session.h
+        #        src/server/servermanager.cpp src/server/servermanager.h
+        #        src/server/listener.cpp src/server/listener.h
+        #        src/server/session.cpp src/server/session.h
 
         # Request
         src/server/request/request.cpp src/server/request/request.h
+        src/server/request/requestprocessing.cpp src/server/request/requestprocessing.h
         src/server/request/requestactions.h
         src/server/request/content_id.h
-        #        src/database/database.cpp
-        #        src/database/database.h
+
+        # Database
+        src/database/database.cpp src/database/database.h
 
         # Buffer
         src/buffer/buffer.cpp src/buffer/buffer.h
 
         # Helpers
-        src/helpers/json_helper.h
+        #        src/helpers/json_helper.h
 
         src/utils/config.h
-        src/user/token.cpp
-        src/user/token.h
-        src/user/token.h
-        src/server/request/requestprocessing.cpp
-        src/server/request/requestprocessing.h
-        src/server/request/requestprocessing.h
+        src/user/token.cpp src/user/token.h
 )
 
 # PostgreSQL
-add_subdirectory(deps/libpqxx-7.8.1 build-pqxx)
-target_link_libraries(CoffeyServer pqxx)
+add_subdirectory(deps/libpqxx build-pqxx)
+target_link_libraries(CoffeyServer PRIVATE pqxx)
 
 target_link_libraries(CoffeyServer ${Boost_LIBRARIES})
-target_link_libraries(CoffeyServer ${examples_LINK_LIBRARIES})
+

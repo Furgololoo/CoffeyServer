@@ -50,11 +50,18 @@ void Listener::on_accept(beast::error_code ec, tcp::socket socket) {
     fail(ec, "accept");
   } else {
     // Create the session and run it
-    std::make_shared<Session>(std::move(socket))->run();
+    auto session = std::make_shared<Session>(std::move(socket));
+    session->run();
+    sessions.push_back(session);
   }
 
   // Accept another connection
   do_accept();
+}
+Listener::~Listener() {
+  std::cout << "~Listener\n";
+  acceptor_.cancel();
+  ioc_.stop();
 }
 
 } // namespace network

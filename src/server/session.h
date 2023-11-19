@@ -62,6 +62,7 @@ public:
 private:
   websocket::stream<beast::tcp_stream> ws_;
   beast::flat_buffer buffer_;
+
   buffer::Buffer &requestBuffer = buffer::Buffer::getInstance();
 };
 

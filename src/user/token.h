@@ -10,7 +10,7 @@ namespace token {
 class Token {
 
 public:
-  static std::string &generate();
+  static std::string generate();
   static bool check(const std::string &token);
 };
 

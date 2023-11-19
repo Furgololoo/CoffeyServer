@@ -32,6 +32,7 @@ class Listener : public std::enable_shared_from_this<Listener> {
 
 public:
   Listener(net::io_context &ioc, tcp::endpoint endpoint);
+  ~Listener();
   // Start accepting incoming connections
   void run() { do_accept(); }
 
@@ -42,6 +43,8 @@ private:
 
   net::io_context &ioc_;
   tcp::acceptor acceptor_;
+
+  std::vector<std::shared_ptr<Session>> sessions;
 };
 
 } // namespace network

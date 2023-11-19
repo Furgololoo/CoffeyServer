@@ -13,25 +13,28 @@ using tcp = boost::asio::ip::tcp; // from <boost/asio/ip/tcp.hpp>
 ServerManager::ServerManager(const boost::asio::ip::address &address_,
                              const uint16_t port_,
                              const uint8_t threads_number_)
-    : address(address_), port(port_), threads_number(threads_number_) {}
-
-void ServerManager::start() {
-
+    : address(address_), port(port_), threads_number(threads_number_) {
   buffer::Buffer::getInstance().setOnDataAvailable(
       std::bind(&ServerManager::startProcessing, this));
+}
+
+void ServerManager::start() {
 
   net::io_context ioc{threads_number};
 
   // Create and launch a listening port
-  std::make_shared<Listener>(ioc, tcp::endpoint{address, port})->run();
+  listener = std::make_shared<Listener>(ioc, tcp::endpoint{address, port});
+  listener->run();
 
   std::cout << "Started listening..." << std::endl;
   // Run the I/O service on the requested number of threads
-  std::vector<std::thread> v;
+  std::vector<std::jthread> v;
   v.reserve(threads_number - 1);
   for (auto i = threads_number - 1; i > 0; --i)
     v.emplace_back([&ioc] { ioc.run(); });
   ioc.run();
+
+  std::cout << "Stopped listening." << std::endl;
 }
 
 void ServerManager::startProcessing() {
