@@ -21,16 +21,28 @@ public:
   void startWork(std::stop_token stop_token);
 
 private:
-  void process(std::unique_ptr<Request> request);
+  void process();
 
-  void get(std::unique_ptr<Request> request);
-  void create(std::unique_ptr<Request> request);
-  void update(std::unique_ptr<Request> request);
-  void remove(std::unique_ptr<Request> request);
-  void closeSession(std::unique_ptr<Request> request);
+  void get();
+  void create();
+  void update();
+  void remove();
+  void closeSession();
+
+  // login, signup, change user data etc
+  void login();
+
+  json::object tokenLogin();
+  json::object passwordLogin();
+
+
+  // only for test
+  void test();
 
   buffer::Buffer &buffer = buffer::Buffer::getInstance();
-  //  database::Database db;
+  database::Database db;
+
+  std::unique_ptr<Request> m_request;
 };
 
 } // namespace network::request

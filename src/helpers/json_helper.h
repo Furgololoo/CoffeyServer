@@ -4,79 +4,15 @@
 
 #pragma once
 
-#include <boost/json/src.hpp>
+#include <iostream>
+#include <boost/json.hpp>
 
 namespace helper::json {
-void pretty_print(std::ostream &os, boost::json::value const &jv,
-                  std::string *indent = nullptr) {
-  std::string indent_;
-  if (!indent)
-    indent = &indent_;
-  switch (jv.kind()) {
-  case boost::json::kind::object: {
-    os << "{\n";
-    indent->append(4, ' ');
-    auto const &obj = jv.get_object();
-    if (!obj.empty()) {
-      auto it = obj.begin();
-      for (;;) {
-        os << *indent << boost::json::serialize(it->key()) << " : ";
-        pretty_print(os, it->value(), indent);
-        if (++it == obj.end())
-          break;
-        os << ",\n";
-      }
-    }
-    os << "\n";
-    indent->resize(indent->size() - 4);
-    os << *indent << "}";
-    break;
-  }
+namespace json = boost::json;
 
-  case boost::json::kind::array: {
-    os << "[\n";
-    indent->append(4, ' ');
-    auto const &arr = jv.get_array();
-    if (!arr.empty()) {
-      auto it = arr.begin();
-      for (;;) {
-        os << *indent;
-        pretty_print(os, *it, indent);
-        if (++it == arr.end())
-          break;
-        os << ",\n";
-      }
-    }
-    os << "\n";
-    indent->resize(indent->size() - 4);
-    os << *indent << "]";
-    break;
-  }
+void pretty_print(std::ostream &, json::value const &jv,
+                  std::string *indent = nullptr);
 
-  case boost::json::kind::string: {
-    os << boost::json::serialize(jv.get_string());
-    break;
-  }
-
-  case boost::json::kind::uint64:
-  case boost::json::kind::int64:
-  case boost::json::kind::double_:
-    os << jv;
-    break;
-
-  case boost::json::kind::bool_:
-    if (jv.get_bool())
-      os << "true";
-    else
-      os << "false";
-    break;
-
-  case boost::json::kind::null:
-    os << "null";
-    break;
-  }
-
-  if (indent->empty())
-    os << "\n";
-}
 } // namespace helper::json
+
+

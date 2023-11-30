@@ -22,17 +22,19 @@ public:
 
   void setResponse(std::function<void(const std::string &text)> response_);
 
-  void callResponse(const std::string &text) const;
+  void callResponse(const json::object &data) const;
 
-  json::object getContentJson() const;
+  [[nodiscard]] json::object getContentJson() const;
+  [[nodiscard]] json::object getRequestDataJson() const;
 
-  ERequestActions getRequestActions() const;
-  EContentID getContentID() const;
+  [[nodiscard]] ERequestActions getRequestActions() const;
+  [[nodiscard]] EContentID getContentID() const;
 
 private:
   ERequestActions action = {};
   EContentID content_id = {};
 
+  json::object request_data;
   json::object content;
   std::string token;
   uint8_t user_id;

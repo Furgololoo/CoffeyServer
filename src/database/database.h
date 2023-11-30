@@ -21,31 +21,47 @@ public:
   void displayTables();
   void displayUsers();
 
-  void createTicket(const json::object &data);
+  // ############# Project management #############
+  bool createProject(const json::object &data);
+  json::array getProjects();
 
-  // All get operations
-  json::object get(const int object_id, const EContentID content_id) const;
-
-  // All create operations
-  bool create(const json::object &data, const EContentID content_id) const;
-
-  // All update operations
-  bool update(const int object_id, const json::object &data,
-              const EContentID content_id) const;
-
-  // All remove operations
-  bool remove(const int object_id, const EContentID content_id) const;
+  // ############# Sprint management #############
+  bool createSprint(const json::object &data);
+  json::object getSprint(const unsigned int &sprint_id);
+  json::object getActiveSprint();
 
   // ############# Ticket management #############
+  bool createTicket(const json::object &data);
+  json::object getTicket(const unsigned int &ticket_id);
+  json::object getTicketPreview(const unsigned int &ticket_id);
 
   // ############# User management #############
-
-  bool changeUserName(const int user_id, const std::string &name);
-  bool changeUserRole(const int user_id, const int role);
-  bool changeUserPassword(const int user_id, const std::string &password);
+  bool changeUserName(const unsigned int &user_id, const std::string &name);
+  bool changeUserRole(const unsigned int &user_id, const unsigned int &role);
+  bool changeUserPassword(const unsigned int &user_id,
+                          const std::string &password);
+  std::string getUserSalt(const unsigned int &user_id);
+  std::string getUserPassword(
+      const unsigned int &user_id);
+  json::object getUser(const unsigned int &user_id);
+  int getUserId(const std::string &login);
   json::object getUsers();
 
+  // ############# Token management #############
+  bool addTokenToUser(const unsigned int user_id,
+                      const std::string &token_str);
+  bool checkToken(const unsigned int user_id, const std::string &token);
+  void removeExpiredToken();
+  void removeTokenForUser(const unsigned int user_id);
+
+  // ############# Helper #############
+  static std::string generateSalt(const int length);
+  static std::string hashPassword(const std::string &plain_password,
+                                  const std::string &salt);
+
 private:
+  static json::array readArray(pqxx::array_parser &array);
+
   std::unique_ptr<pqxx::connection> conn;
 };
 
