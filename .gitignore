@@ -34,3 +34,5 @@ cmake-*
 *.exe
 *.out
 *.app
+
+deps_build/

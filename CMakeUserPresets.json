@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "F:\\cpp\\projects\\real\\CoffeyServer\\deps_build\\build\\Debug\\generators\\CMakePresets.json"
+    ]
+}

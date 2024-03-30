@@ -1,0 +1,8 @@
+[requires]
+    boost/1.83.0
+    poco/1.13.1
+[generators]
+    CMakeDeps
+    CMakeToolchain
+[layout]
+    cmake_layout
